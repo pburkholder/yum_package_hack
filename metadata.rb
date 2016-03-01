@@ -1,0 +1,7 @@
+name 'testone'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures testone'
+long_description 'Installs/Configures testone'
+version '0.1.0'
