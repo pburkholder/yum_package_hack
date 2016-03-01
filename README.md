@@ -1,4 +1,4 @@
-# testone
+# yum_package_hack
 
 TODO: Enter the cookbook description here.
 
