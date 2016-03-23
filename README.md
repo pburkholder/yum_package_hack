@@ -19,6 +19,13 @@ libXtst 0 1.2.2 2.1.el6 x86_64 [] r rhel6-x86_64-660
 
 ```
 kitchen converge
+kitchen login
+```
+
+Then:
+
+```
+sudo chef-apply -e "yum_package 'libXtst >= 1.0.99.2-3.el6'"
 ```
 
 TODO: Enter the cookbook description here.
