@@ -6,10 +6,12 @@
 
 yum_package 'libX11'
 
-cookbook_file '/root/libXtst-1.2.2-2.el6.x86_64.rpm' do
-  source 'libXtst-1.2.1-2.el6.x86_64.rpm'
+rpm = 'libXtst-1.2.2-2.1.el6.x86_64.rpm'
+
+cookbook_file '/root/' + rpm do
+  source rpm
 end
 
 yum_package 'libXtst' do
-  source '/root/libXtst-1.2.2-2.el6.x86_64.rpm'
+  source '/root/' + rpm
 end

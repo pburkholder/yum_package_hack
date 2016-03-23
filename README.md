@@ -1,12 +1,13 @@
 # yum_package_hack
 
-Set up system with `httpd` and `libXtxt` installed and
-with a yum-cache.py that emits:
+This cookbook recreates the issue reported in https://getchef.zendesk.com/agent/tickets/8421:
+- a system has libXtxt installed as `1.2.2-2.1.el6 x86_64`
+- the customer uses an internal package repository
+- for whatever reason, the output from `yum-dump.py` is not sorted newest to oldest
+- a cookbook uses `yum_package 'libXtst >= 1.0.99.2-3.el6'`
+- when the above runs, and the `yum-dump.py` output is ordered as below then the chef-client fails.
 
 ```
-httpd 0 2.2.15 47.el6_7.2 x86_64 [] a sat-mirror
-httpd 0 2.2.15 47.el6_7.1 x86_64 [] a sat-mirror
-httpd 0 2.2.15 47.el6_7.3 x86_64 [] r sat-mirror
 libXtst 0 1.2.1 2.el6 x86_64 [] a rhel6-x86_64-660
 libXtst 0 1.2.2 2.1.el6 i686 [] a rhel6-x86_64-660
 libXtst 0 1.0.99.2 3.el6 x86_64 [] a rhel6-x86_64-660
@@ -15,7 +16,7 @@ libXtst 0 1.0.99.2 3.el6 i686 [] a rhel6-x86_64-660
 libXtst 0 1.2.2 2.1.el6 x86_64 [] r rhel6-x86_64-660
 ```
 
-
+## To recreate
 
 ```
 kitchen converge
@@ -28,8 +29,7 @@ Then:
 sudo chef-apply -e "yum_package 'libXtst >= 1.0.99.2-3.el6'"
 ```
 
-TODO: Enter the cookbook description here.
+## Possible resolutions:
 
-
-export KITCHEN_LOCAL_YAML=.kitchen.dokken.yml
-eval $(docker-machine env default)
+- Update `yum-dump.py` to return correctly sorted packages
+- Update the yum_package provider to sort the package list returned by `yum-dump`
