@@ -29,7 +29,8 @@ Then:
 sudo chef-apply -e "yum_package 'libXtst >= 1.0.99.2-3.el6'"
 ```
 
-## Possible resolutions:
+## Possible resolutions
 
 - Update `yum-dump.py` to return correctly sorted packages
 - Update the yum_package provider to sort the package list returned by `yum-dump`
+- Others approaches....
