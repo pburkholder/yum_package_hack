@@ -4,20 +4,22 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-yum_package 'libX11' do
-  action :nothing
-end.run_action(:install)
 
-cookbook_file '/root/libXtst-1.2.1-2.el6.i686.rpm' do
+chef_path = '/'
+
+cookbook_file chef_path + 'yum-dump.py' do
   action :nothing
-  source 'libXtst-1.2.1-2.el6.i686.rpm'
-end.run_action(:create)
+  source 'yum-dump.py'
+end
 
 yum_package 'libXtst' do
-  action :nothing
-  source '/root/libXtst-1.2.1-2.el6.i686.rpm'
-end.run_action(:install)
+  action :install
+  source '/root/libXtst-1.2.1-2.el6.x86_64.rpm'
+end
 
-yum_package 'libXtst >= 1.0.99.2-3.el6'
+yum_package "httpd = 2.2.15-47.el6_7"
 
-# yum_package "httpd > 2.2.15-47.el6_7"
+include_recipe 'yum_package_hack::libxtst'
+
+# yum_package 'libXtst >= 1.0.99.2-3.el6'
+# yum_package "httpd > 2.2.15-47.el6.centos.3"
